@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import checkLogged from "../functions/checkLogged";
 
 const Homepage = () => {
-  const [cookie, setCookie] = useCookies(["session"]);
+  const [cookie, removeCookie] = useCookies(["session"]);
   const navigate = useNavigate();
   const [password, setPassword] = useState([]);
 
@@ -25,11 +25,12 @@ const Homepage = () => {
 
   useEffect(() => {
     if (!cookie.session) {
-      navigate("/login");
+      return navigate("/login");
     } else {
       checkLogged(cookie.session).then((res) => {
-        if (!res.addPassword == true) {
-          navigate("/login");
+        if (!res.status == 200) {
+          removeCookie("session");
+          return navigate("/login");
         }
       });
     }

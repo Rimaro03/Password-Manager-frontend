@@ -1,6 +1,6 @@
 const checkLogged = async (cookie) => {
   return await fetch(
-    "https://password-manager-backend.vercel.app/user/addPassword",
+    "https://password-manager-backend.vercel.app/user/addPasswordItem",
     {
       method: "POST",
       headers: {
@@ -9,7 +9,8 @@ const checkLogged = async (cookie) => {
       },
     }
   ).then(async (res) => {
-    return res.json();
+    console.log(res);
+    return await res.json();
   });
 };
 export default checkLogged;
