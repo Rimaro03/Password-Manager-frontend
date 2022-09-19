@@ -13,7 +13,7 @@ const Homepage = () => {
       return navigate("/login");
     } else {
       checkLogged(cookie.session).then((res) => {
-        if (!res.status == 200) {
+        if (!res.ok) {
           removeCookie("session");
           return navigate("/login");
         }

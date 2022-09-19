@@ -1,16 +1,15 @@
 const checkLogged = async (cookie) => {
   return await fetch(
-    "https://password-manager-backend.vercel.app/user/addPasswordItem",
+    "https://password-manager-backend.vercel.app/user/logged",
     {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         Authorization: cookie,
       },
     }
-  ).then(async (res) => {
-    console.log(res);
-    return await res.json();
+  ).then((res) => {
+    return res;
   });
 };
 export default checkLogged;
