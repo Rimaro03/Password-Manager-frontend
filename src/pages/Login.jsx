@@ -32,6 +32,7 @@ const Login = () => {
   }, []);
 
   const handleSubmit = async () => {
+    setIsLoading(true);
     if (!(username.length > 0 && password.length > 0)) {
       setMessage("Insert all credentials required");
       setSnackOpen(true);
@@ -45,7 +46,6 @@ const Login = () => {
       body: JSON.stringify({ username: username, password: password }),
     })
       .then(async (res) => {
-        console.log(res);
         switch (res.status) {
           case 200:
             const tokenObj = await res.json();
@@ -66,11 +66,12 @@ const Login = () => {
           default:
             break;
         }
+        setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
         setMessage("A general error has occured");
         setSnackOpen(true);
+        setIsLoading(false);
       });
   };
 
@@ -148,6 +149,16 @@ const Login = () => {
           Not registered yet? Register here
         </Link>
       </Typography>
+      {isLoading ? (
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={isLoading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      ) : (
+        <></>
+      )}
       {isLoading ? (
         <Backdrop
           sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
