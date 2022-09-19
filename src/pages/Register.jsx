@@ -15,7 +15,7 @@ import {
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { FormContainer } from "../style/components";
-import { PALETTE } from "../style/theme";
+import { palette } from "../style/theme";
 import { useNavigate } from "react-router-dom";
 import Message from "../components/Message";
 import { useUIContext } from "../context/ui";
@@ -35,15 +35,18 @@ const Register = () => {
   );
 
   const handleSubmit = async () => {
+    setIsLoading(true);
     if (!(email.length > 0 && username.length > 0 && password.length > 0)) {
       setSeverity("error");
       setMessage("Insert all credentials required");
       setSnackOpen(true);
+      setSnackOpen(false);
       return;
     }
     if (!(password == passwordConfirm)) {
       setMessage("Password and confirm password are different");
       setSnackOpen(true);
+      setSnackOpen(false);
       return;
     }
     if (validatePassword.test(password)) {
@@ -52,6 +55,7 @@ const Register = () => {
         "Password must be longer than 8 characters and must contain a number and a special character"
       );
       setSnackOpen(true);
+      setSnackOpen(false);
       return;
     }
     await fetch("https://password-manager-backend.vercel.app/auth/register", {
@@ -66,31 +70,20 @@ const Register = () => {
       }),
     })
       .then(async (res) => {
-        console.log(res.status);
-        switch (res.status) {
-          case 200:
-            setSeverity("success");
-            setMessage("Registration completed successfully");
-            setSnackOpen(true);
-            break;
-
-          case 404:
-            setSeverity("error");
-            setMessage("Incorrect credentials");
-            setSnackOpen(true);
-            break;
-
-          case 500:
-            setSeverity("error");
-            setMessage("Internal server error");
-            setSnackOpen(true);
-            break;
-
-          default:
-            break;
+        let message = await res.json().body.message;
+        if (res.ok) {
+          setSeverity("success");
+          setMessage("Registration completed successfully");
+          setSnackOpen(true);
+          setInterval(() => {
+            navigate("/login");
+          }, 1500);
+          return;
         }
+        setIsLoading(false);
       })
       .catch((err) => {
+        setIsLoading(false);
         setSeverity("error");
         setMessage("A general error has occured");
         setSnackOpen(true);
@@ -99,7 +92,7 @@ const Register = () => {
 
   return (
     <FormContainer>
-      <LockOpen fontSize="large" sx={{ color: PALETTE.primary.main }} />
+      <LockOpen fontSize="large" sx={{ color: palette.purple.main }} />
       <Typography variant="h5" sx={{ mt: 5 }}>
         Sign up
       </Typography>

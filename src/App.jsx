@@ -6,6 +6,8 @@ import Login from "./pages/Login";
 import { UIProvider } from "./context/ui";
 import Register from "./pages/Register";
 import Homepage from "./pages/Homepage";
+import Vault from "./pages/Vault";
+import Generator from "./pages/Generator";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/homepage" element={<Homepage />} />
+            <Route path="/vault" element={<Vault />} />
+            <Route path="/generator" element={<Generator />} />
           </Routes>
         </BrowserRouter>
       </UIProvider>

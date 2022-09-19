@@ -1,19 +1,28 @@
 import { createTheme } from "@mui/material";
 
-export const PALETTE = {
-  primary: {
-    main: "#4756CA",
+export const palette = {
+  background: {
+    main: "#303030",
   },
-  secondary: {
-    main: "#FFFFFF",
+  navbar: {
+    main: "#424242",
+  },
+  lightGrey: {
+    main: "595959",
   },
   black: {
-    main: "#000000",
+    main: "#06080C",
+  },
+  purple: {
+    main: "#653496",
+  },
+  darkWhite: {
+    main: "#D0CECE",
   },
 };
 
 export const theme = createTheme({
-  palette: PALETTE,
+  palette: palette,
   shape: {
     borderRadius: 20,
   },

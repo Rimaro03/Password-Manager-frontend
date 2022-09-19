@@ -11,7 +11,7 @@ import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import Message from "../components/Message";
 import { FormContainer } from "../style/components";
-import { PALETTE } from "../style/theme";
+import { palette } from "../style/theme";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useUIContext } from "../context/ui";
@@ -77,7 +77,7 @@ const Login = () => {
 
   return (
     <FormContainer>
-      <LockOpen fontSize="large" sx={{ color: PALETTE.primary.main }} />
+      <LockOpen fontSize="large" sx={{ color: palette.purple.main }} />
       <Typography variant="h5" sx={{ mt: 5 }}>
         Sign In
       </Typography>
