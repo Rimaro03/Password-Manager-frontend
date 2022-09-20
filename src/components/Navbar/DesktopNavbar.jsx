@@ -1,9 +1,29 @@
-import { AccountCircle } from "@mui/icons-material";
-import { Box, Divider, Drawer, IconButton, Typography } from "@mui/material";
+import {
+  AccountCircle,
+  Cyclone,
+  Home,
+  Key,
+  Lock,
+  Logout,
+  Loop,
+  Menu,
+} from "@mui/icons-material";
+import {
+  Box,
+  Divider,
+  Drawer,
+  Icon,
+  IconButton,
+  ListItemIcon,
+  SvgIcon,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { MenuBox, MenuItem } from "../../style/components";
+import { MenuBox, MenuItem, MenuTitle } from "../../style/components";
+import Logo from "../../assets/logo.png";
+import { palette } from "../../style/theme";
 
 const DesktopNavbar = () => {
   const navigate = useNavigate();
@@ -22,72 +42,81 @@ const DesktopNavbar = () => {
         justifyContent={"space-between"}
         height={"100%"}
       >
-        <Typography
-          variant="h4"
-          fontWeight={"bold"}
-          pt={5}
-          sx={{ ":hover": { cursor: "pointer" } }}
-          onClick={() => {
-            navigate("/");
-          }}
-          textAlign={"center"}
-        >
-          FAKE SHOP
-        </Typography>
-        <Box
-          display={"flex"}
-          flexDirection={"column"}
-          alignItems={"flex-end"}
-          justifyContent={"space-around"}
-          height={"50%"}
-        >
-          <MenuBox>
-            <MenuItem
-              variant={"h6"}
-              onClick={() => {
-                navigate("/men");
-              }}
-            >
-              MEN'S CLOTHING
-            </MenuItem>
-          </MenuBox>
-          <MenuBox>
-            <MenuItem
-              variant={"h6"}
-              onClick={() => {
-                navigate("/women");
-              }}
-            >
-              WOMEN'S CLOTHING
-            </MenuItem>
-          </MenuBox>
-          <MenuBox>
-            <MenuItem
-              variant={"h6"}
-              onClick={() => {
-                navigate("/jewelry");
-              }}
-            >
-              JEWELERY
-            </MenuItem>
-          </MenuBox>
+        <Box>
+          <MenuTitle>
+            <Box color="white" display={"flex"}>
+              <Lock fontSize="large" sx={{ m: 2 }} />
+              <Typography
+                variant="h4"
+                fontSize={32}
+                sx={{ width: "min-content" }}
+              >
+                Password Manager
+              </Typography>
+            </Box>
+            <IconButton>
+              <Menu fontSize="large" sx={{ color: "white" }} />
+            </IconButton>
+          </MenuTitle>
+          <Box sx={{ mt: 10 }}>
+            <MenuBox>
+              <ListItemIcon>
+                <Home fontSize={"large"} sx={{ color: "white" }} />
+              </ListItemIcon>
+              <MenuItem
+                variant={"h6"}
+                onClick={() => {
+                  navigate("/men");
+                }}
+              >
+                Homepage
+              </MenuItem>
+            </MenuBox>
+            <MenuBox>
+              <ListItemIcon>
+                <Key fontSize={"large"} sx={{ color: "white" }} />
+              </ListItemIcon>
+              <MenuItem
+                variant={"h6"}
+                onClick={() => {
+                  navigate("/women");
+                }}
+              >
+                My vault
+              </MenuItem>
+            </MenuBox>
+            <MenuBox>
+              <Loop fontSize={"large"} sx={{ color: "white" }} />
+              <MenuItem
+                variant={"h6"}
+                onClick={() => {
+                  navigate("/jewelry");
+                }}
+              >
+                Generator
+              </MenuItem>
+            </MenuBox>
+          </Box>
         </Box>
         <Box>
           <Divider />
           <Box display={"flex"} justifyContent={"space-between"} p={2}>
-            <AccountCircle fontSize="large" sx={{ margin: "auto" }} />
+            <AccountCircle
+              fontSize="large"
+              sx={{ margin: "auto", color: "white" }}
+            />
             <Box>
               <Typography variant={"h6"}>Giuseppe Tutino</Typography>
-              <Typography variant={"subtitle2"} color={"text.secondary"}>
+              <Typography variant={"subtitle2"} color={palette.darkWhite.main}>
                 View profile
               </Typography>
             </Box>
             <IconButton
               fontSize="medium"
-              sx={{ margin: "auto" }}
+              sx={{ margin: "auto", color: "white" }}
               onClick={handleLogout}
             >
-              {/*<Logout />*/}
+              <Logout />
             </IconButton>
           </Box>
         </Box>

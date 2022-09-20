@@ -70,7 +70,7 @@ const Register = () => {
       }),
     })
       .then(async (res) => {
-        let message = await res.json().body.message;
+        setIsLoading(false);
         if (res.ok) {
           setSeverity("success");
           setMessage("Registration completed successfully");
@@ -78,9 +78,11 @@ const Register = () => {
           setInterval(() => {
             navigate("/login");
           }, 1500);
-          return;
+        } else {
+          setSeverity("error");
+          setMessage("A general error has occured");
+          setSnackOpen(true);
         }
-        setIsLoading(false);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -96,7 +98,7 @@ const Register = () => {
       <Typography variant="h5" sx={{ mt: 5 }}>
         Sign up
       </Typography>
-      <Typography variant="subtitle1" color={"text.secondary"}>
+      <Typography variant="subtitle1" color={palette.darkWhite.main}>
         Enter your credentials
       </Typography>
       <Box
@@ -110,14 +112,15 @@ const Register = () => {
       >
         <TextField
           id="input-with-sx"
+          color="secondary"
           label={
             <Box display={"flex"}>
-              <AccountCircle sx={{ color: "action.active" }} />
+              <AccountCircle color={"secondary"} />
               <Typography sx={{ ml: 1 }}>Username</Typography>
             </Box>
           }
           variant="outlined"
-          sx={{ width: "100%" }}
+          sx={{ width: "100%", input: { color: "white" } }}
           onChange={(e) => {
             setUsername(e.target.value);
           }}
@@ -135,14 +138,15 @@ const Register = () => {
         <TextField
           id="input-with-sx"
           type={"email"}
+          color="secondary"
           label={
             <Box display={"flex"}>
-              <EmailRounded sx={{ color: "action.active" }} />
+              <EmailRounded color="secondary" />
               <Typography sx={{ ml: 1 }}>Email</Typography>
             </Box>
           }
           variant="outlined"
-          sx={{ width: "100%" }}
+          sx={{ width: "100%", input: { color: "white" } }}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
@@ -158,15 +162,16 @@ const Register = () => {
       >
         <TextField
           id="input-with-sx"
+          color="secondary"
           label={
             <Box display={"flex"}>
-              <Lock sx={{ color: "action.active" }} />
+              <Lock color="secondary" />
               <Typography sx={{ ml: 1 }}>Password</Typography>
             </Box>
           }
           variant="outlined"
           type={"password"}
-          sx={{ width: "100%" }}
+          sx={{ width: "100%", input: { color: "white" } }}
           onChange={(e) => {
             setPassword(e.target.value);
           }}
@@ -182,15 +187,16 @@ const Register = () => {
       >
         <TextField
           id="input-with-sx"
+          color="secondary"
           label={
             <Box display={"flex"}>
-              <Lock sx={{ color: "action.active" }} />
+              <Lock color="secondary" />
               <Typography sx={{ ml: 1 }}>Confirm password</Typography>
             </Box>
           }
           variant="outlined"
           type={"password"}
-          sx={{ width: "100%" }}
+          sx={{ width: "100%", input: { color: "white" } }}
           onChange={(e) => {
             setPasswordConfirm(e.target.value);
           }}
@@ -203,14 +209,14 @@ const Register = () => {
       >
         SIGN IN
       </Button>
-      <Typography variant="caption">
+      <Typography variant="caption" sx={{ color: palette.darkWhite.main }}>
         <Link
           href="#"
           onClick={() => {
             navigate("/login");
           }}
         >
-          Already have an account? Click here
+          Already have an account? Log in here
         </Link>
       </Typography>
       {isLoading ? (

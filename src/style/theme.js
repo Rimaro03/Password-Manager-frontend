@@ -1,6 +1,12 @@
 import { createTheme } from "@mui/material";
 
 export const palette = {
+  primary: {
+    main: "#653496",
+  },
+  secondary: {
+    main: "#ffffff",
+  },
   background: {
     main: "#303030",
   },
@@ -19,11 +25,32 @@ export const palette = {
   darkWhite: {
     main: "#D0CECE",
   },
+  hover: {
+    main: "#595959",
+  },
 };
 
 export const theme = createTheme({
   palette: palette,
   shape: {
-    borderRadius: 20,
+    borderRadius: 10,
+  },
+  components: {
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          color: "white",
+        },
+      },
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: palette.navbar.main,
+          width: "350px",
+          border: "none",
+        },
+      },
+    },
   },
 });

@@ -46,42 +46,30 @@ const Login = () => {
       body: JSON.stringify({ username: username, password: password }),
     })
       .then(async (res) => {
-        switch (res.status) {
-          case 200:
-            const tokenObj = await res.json();
-            setCookie("session", tokenObj.token, { path: "/" });
-            navigate("/homepage");
-            break;
-
-          case 404:
-            setMessage("Incorrect credentials");
-            setSnackOpen(true);
-            break;
-
-          case 500:
-            setMessage("Internal server error");
-            setSnackOpen(true);
-            break;
-
-          default:
-            break;
-        }
         setIsLoading(false);
+        const json = await res.json();
+        if (res.ok) {
+          navigate("/homepage");
+          setCookie("session", json.token, { path: "/" });
+        } else {
+          setMessage("A general error has occured");
+          setSnackOpen(true);
+        }
       })
       .catch((err) => {
+        setIsLoading(false);
         setMessage("A general error has occured");
         setSnackOpen(true);
-        setIsLoading(false);
       });
   };
 
   return (
     <FormContainer>
       <LockOpen fontSize="large" sx={{ color: palette.purple.main }} />
-      <Typography variant="h5" sx={{ mt: 5 }}>
+      <Typography variant="h5" sx={{ mt: 5 }} color="white">
         Sign In
       </Typography>
-      <Typography variant="subtitle1" color={"text.secondary"}>
+      <Typography variant="subtitle1" color={palette.darkWhite.main}>
         Enter your credentials
       </Typography>
       <Box
@@ -95,14 +83,15 @@ const Login = () => {
       >
         <TextField
           id="input-with-sx"
+          color="secondary"
           label={
             <Box display={"flex"}>
-              <AccountCircle sx={{ color: "action.active" }} />
+              <AccountCircle color={"secondary"} />
               <Typography sx={{ ml: 1 }}>Username</Typography>
             </Box>
           }
           variant="outlined"
-          sx={{ width: "100%" }}
+          sx={{ width: "100%", input: { color: "white" } }}
           onChange={(e) => {
             setUsername(e.target.value);
           }}
@@ -120,13 +109,13 @@ const Login = () => {
           id="input-with-sx"
           label={
             <Box display={"flex"}>
-              <Lock sx={{ color: "action.active" }} />
+              <Lock color={"secondary"} />
               <Typography sx={{ ml: 1 }}>Password</Typography>
             </Box>
           }
           variant="outlined"
           type={"password"}
-          sx={{ width: "100%" }}
+          sx={{ width: "100%", input: { color: "white" } }}
           onChange={(e) => {
             setPassword(e.target.value);
           }}
@@ -134,7 +123,7 @@ const Login = () => {
       </Box>
       <Button
         variant="contained"
-        sx={{ width: "100%", mt: 2 }}
+        sx={{ width: "100%", mt: 2, mb: 1 }}
         onClick={handleSubmit}
       >
         SIGN IN
@@ -145,8 +134,9 @@ const Login = () => {
           onClick={() => {
             navigate("/register");
           }}
+          color="secondary"
         >
-          Not registered yet? Register here
+          Not registered yet? Create an account here
         </Link>
       </Typography>
       {isLoading ? (
