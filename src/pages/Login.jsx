@@ -34,6 +34,7 @@ const Login = () => {
   const handleSubmit = async () => {
     setIsLoading(true);
     if (!(username.length > 0 && password.length > 0)) {
+      setIsLoading(false);
       setMessage("Insert all credentials required");
       setSnackOpen(true);
       return;

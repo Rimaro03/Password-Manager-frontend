@@ -1,28 +1,23 @@
 import {
   AccountCircle,
-  Cyclone,
   Home,
   Key,
   Lock,
   Logout,
   Loop,
-  Menu,
 } from "@mui/icons-material";
 import {
   Box,
   Divider,
   Drawer,
-  Icon,
   IconButton,
   ListItemIcon,
-  SvgIcon,
   Typography,
 } from "@mui/material";
 import React from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { MenuBox, MenuItem, MenuTitle } from "../../style/components";
-import Logo from "../../assets/logo.png";
 import { palette } from "../../style/theme";
 
 const DesktopNavbar = () => {
@@ -35,7 +30,7 @@ const DesktopNavbar = () => {
   };
 
   return (
-    <Drawer open={true} variant="permanent">
+    <Drawer variant="permanent">
       <Box
         display={"flex"}
         flexDirection={"column"}
@@ -54,9 +49,7 @@ const DesktopNavbar = () => {
                 Password Manager
               </Typography>
             </Box>
-            <IconButton>
-              <Menu fontSize="large" sx={{ color: "white" }} />
-            </IconButton>
+            <Box></Box>
           </MenuTitle>
           <Box sx={{ mt: 10 }}>
             <MenuBox>
@@ -66,7 +59,7 @@ const DesktopNavbar = () => {
               <MenuItem
                 variant={"h6"}
                 onClick={() => {
-                  navigate("/men");
+                  navigate("/homepage");
                 }}
               >
                 Homepage
@@ -79,7 +72,7 @@ const DesktopNavbar = () => {
               <MenuItem
                 variant={"h6"}
                 onClick={() => {
-                  navigate("/women");
+                  navigate("/vault");
                 }}
               >
                 My vault
@@ -90,7 +83,7 @@ const DesktopNavbar = () => {
               <MenuItem
                 variant={"h6"}
                 onClick={() => {
-                  navigate("/jewelry");
+                  navigate("/generator");
                 }}
               >
                 Generator

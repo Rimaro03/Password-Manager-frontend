@@ -1,4 +1,4 @@
-import { Box, ListItem, Typography } from "@mui/material";
+import { Box, ListItem, TextField, Toolbar, Typography } from "@mui/material";
 import { styled } from "@mui/material";
 
 export const FormContainer = styled(Box)(({ theme }) => ({
@@ -33,4 +33,27 @@ export const MenuTitle = styled(Box)(() => ({
   justifyContent: "space-around",
   paddingTop: 50,
   width: "100%",
+}));
+
+export const AppbarContainer = styled(Toolbar)(() => ({
+  display: "flex",
+  justifyContent: "space-between",
+  width: "auto",
+}));
+
+export const SearchField = styled(TextField)(() => ({
+  "& label, & label.Mui-focused": {
+    color: "white",
+  },
+  "& .MuiOutlinedInput-root": {
+    "& fieldset": {
+      borderColor: "white",
+    },
+    "&:hover fieldset": {
+      borderColor: "white",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "white",
+    },
+  },
 }));

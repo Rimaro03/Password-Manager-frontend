@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import Appbar from "../components/Appbar/Appbar";
 import Navbar from "../components/Navbar/Navbar";
 import checkLogged from "../functions/checkLogged";
 
@@ -24,6 +25,7 @@ const Homepage = () => {
   return (
     <>
       <Navbar />
+      <Appbar />
     </>
   );
 };
