@@ -1,6 +1,8 @@
+import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import PasswordSecurity from "../charts/PasswordSecurity";
 import Appbar from "../components/Appbar/Appbar";
 import Navbar from "../components/Navbar/Navbar";
 import checkLogged from "../functions/checkLogged";
@@ -26,6 +28,7 @@ const Homepage = () => {
     <>
       <Navbar />
       <Appbar />
+      <PasswordSecurity />
     </>
   );
 };

@@ -67,6 +67,7 @@ const DesktopAppbar = () => {
           <SearchField
             {...params}
             label="Search..."
+            sx={{ input: { color: "white" } }}
             InputProps={{
               ...params.InputProps,
               endAdornment: (

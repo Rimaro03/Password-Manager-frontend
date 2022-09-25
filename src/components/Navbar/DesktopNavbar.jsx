@@ -7,6 +7,7 @@ import {
   Loop,
 } from "@mui/icons-material";
 import {
+  Avatar,
   Box,
   Divider,
   Drawer,
@@ -14,19 +15,36 @@ import {
   ListItemIcon,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { MenuBox, MenuItem, MenuTitle } from "../../style/components";
+import { useUIContext } from "../../context/ui";
+import {
+  MenuBox,
+  MenuItem,
+  MenuTitle,
+  ProfileContainer,
+} from "../../style/components";
 import { palette } from "../../style/theme";
+import Profile from "../Profile/Profile";
 
 const DesktopNavbar = () => {
   const navigate = useNavigate();
   const [cookie, setCookie, removeCookie] = useCookies();
+  const { profileOpen, setProfileOpen } = useUIContext();
+  const userDatas = JSON.parse(window.localStorage.getItem("userDatas"));
+
+  useEffect(() => {
+    setProfileOpen(false);
+  }, []);
 
   const handleLogout = () => {
     navigate("/login");
     removeCookie("session");
+  };
+
+  const openProfile = () => {
+    setProfileOpen(true);
   };
 
   return (
@@ -52,54 +70,52 @@ const DesktopNavbar = () => {
             <Box></Box>
           </MenuTitle>
           <Box sx={{ mt: 10 }}>
-            <MenuBox>
+            <MenuBox
+              onClick={() => {
+                navigate("/homepage");
+              }}
+            >
               <ListItemIcon>
                 <Home fontSize={"large"} sx={{ color: "white" }} />
               </ListItemIcon>
-              <MenuItem
-                variant={"h6"}
-                onClick={() => {
-                  navigate("/homepage");
-                }}
-              >
-                Homepage
-              </MenuItem>
+              <MenuItem variant={"h6"}>Homepage</MenuItem>
             </MenuBox>
-            <MenuBox>
+            <MenuBox
+              onClick={() => {
+                navigate("/vault");
+              }}
+            >
               <ListItemIcon>
                 <Key fontSize={"large"} sx={{ color: "white" }} />
               </ListItemIcon>
-              <MenuItem
-                variant={"h6"}
-                onClick={() => {
-                  navigate("/vault");
-                }}
-              >
-                My vault
-              </MenuItem>
+              <MenuItem variant={"h6"}>My vault</MenuItem>
             </MenuBox>
-            <MenuBox>
+            <MenuBox
+              onClick={() => {
+                navigate("/generator");
+              }}
+            >
               <Loop fontSize={"large"} sx={{ color: "white" }} />
-              <MenuItem
-                variant={"h6"}
-                onClick={() => {
-                  navigate("/generator");
-                }}
-              >
-                Generator
-              </MenuItem>
+              <MenuItem variant={"h6"}>Generator</MenuItem>
             </MenuBox>
           </Box>
         </Box>
-        <Box>
+        <ProfileContainer onClick={openProfile}>
           <Divider />
           <Box display={"flex"} justifyContent={"space-between"} p={2}>
-            <AccountCircle
-              fontSize="large"
-              sx={{ margin: "auto", color: "white" }}
+            <Avatar
+              src={
+                "https://avatars.dicebear.com/api/miniavs/1f502383-09b9-4833-bf53-b1101f8f303d.svg"
+              }
+              sx={{
+                margin: "auto",
+                width: 50,
+                height: 50,
+                backgroundColor: "white",
+              }}
             />
             <Box>
-              <Typography variant={"h6"}>Giuseppe Tutino</Typography>
+              <Typography variant={"h6"}>{userDatas.username}</Typography>
               <Typography variant={"subtitle2"} color={palette.darkWhite.main}>
                 View profile
               </Typography>
@@ -112,7 +128,8 @@ const DesktopNavbar = () => {
               <Logout />
             </IconButton>
           </Box>
-        </Box>
+        </ProfileContainer>
+        <Profile />
       </Box>
     </Drawer>
   );

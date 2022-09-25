@@ -31,6 +31,18 @@ const Login = () => {
     }
   }, []);
 
+  const saveUserInfos = (token) => {
+    fetch("https://password-manager-backend.vercel.app/user/info", {
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        window.localStorage.setItem("userDatas", JSON.stringify(json));
+      });
+  };
+
   const handleSubmit = async () => {
     setIsLoading(true);
     if (!(username.length > 0 && password.length > 0)) {
@@ -50,8 +62,9 @@ const Login = () => {
         setIsLoading(false);
         const json = await res.json();
         if (res.ok) {
-          navigate("/homepage");
           setCookie("session", json.token, { path: "/" });
+          saveUserInfos(json.token);
+          navigate("/homepage");
         } else {
           setMessage("A general error has occured");
           setSnackOpen(true);

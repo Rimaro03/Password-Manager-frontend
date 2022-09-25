@@ -19,6 +19,7 @@ import { palette } from "../style/theme";
 import { useNavigate } from "react-router-dom";
 import Message from "../components/Message";
 import { useUIContext } from "../context/ui";
+import AvatarChooser from "../components/AvatarChooser/AvatarChooser";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -30,6 +31,7 @@ const Register = () => {
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState("error");
   const navigate = useNavigate();
+  const [avatar, setAvatar] = useState("");
   const validatePassword = new RegExp(
     '^.*(?=.{6,})(?=.*[a-zA-Z])(?=.*d)(?=.*[!&$%&? "]).*$'
   );
@@ -67,6 +69,7 @@ const Register = () => {
         email: email,
         username: username,
         password: password,
+        avatar: avatar,
       }),
     })
       .then(async (res) => {
@@ -95,12 +98,14 @@ const Register = () => {
   return (
     <FormContainer>
       <LockOpen fontSize="large" sx={{ color: palette.purple.main }} />
-      <Typography variant="h5" sx={{ mt: 5 }}>
-        Sign up
-      </Typography>
+      <Typography variant="h5">Sign up</Typography>
       <Typography variant="subtitle1" color={palette.darkWhite.main}>
         Enter your credentials
       </Typography>
+      <AvatarChooser
+        setAvatar={(avatar) => setAvatar(avatar)}
+        avatar={avatar}
+      />
       <Box
         sx={{
           display: "flex",

@@ -1,0 +1,2 @@
+get https://password-manager-backend.vercel.app/user/passwords
+Authorization: cookie.session,

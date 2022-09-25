@@ -1,5 +1,13 @@
-import { Box, ListItem, TextField, Toolbar, Typography } from "@mui/material";
+import {
+  Box,
+  ListItem,
+  Popover,
+  TextField,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import { styled } from "@mui/material";
+import { palette } from "./theme";
 
 export const FormContainer = styled(Box)(({ theme }) => ({
   backgroundColor: "#424242",
@@ -56,4 +64,39 @@ export const SearchField = styled(TextField)(() => ({
       borderColor: "white",
     },
   },
+}));
+
+export const AvatarContainer = styled(Box)(() => ({
+  backgroundColor: "white",
+  borderRadius: "50%",
+  width: "30%",
+  padding: 10,
+  margin: "auto",
+  alignItems: "center",
+  ":hover": {
+    cursor: "pointer",
+  },
+}));
+
+export const EditText = styled(Typography)(() => ({
+  color: "black",
+}));
+
+export const ProfileContainer = styled(Box)(() => ({
+  ":hover": {
+    cursor: "pointer",
+  },
+}));
+
+export const ProfilePage = styled(Box)(() => ({
+  backgroundColor: palette.primary.main,
+  display: "flex",
+  borderRadius: 20,
+  margin: "auto",
+  padding: 10,
+}));
+
+export const PersonalDatas = styled(Box)(() => ({
+  display: "flex",
+  flexDirection: "column",
 }));

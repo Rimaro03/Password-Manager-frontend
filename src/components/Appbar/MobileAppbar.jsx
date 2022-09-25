@@ -6,6 +6,7 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
+import { useCookies } from "react-cookie";
 import { useUIContext } from "../../context/ui";
 import { AppbarContainer, SearchField } from "../../style/components";
 import { palette } from "../../style/theme";
@@ -15,14 +16,26 @@ const MobileAppbar = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [options, setOptions] = useState([]);
+  const [cookie, setCookie] = useCookies();
 
   useState(() => {
     setLoading(true);
-    fetch("https://password-manager-backend.vercel.app/user/passwords")
+    fetch("https://password-manager-backend.vercel.app/user/passwords", {
+      headers: {
+        Authorization: cookie.session,
+      },
+    })
       .then((res) => res.json())
       .then((json) => {
-        setOptions(json);
+        let urlList = [];
+        json.passwords.forEach((password) => {
+          urlList.push(password);
+        });
+        setOptions(urlList);
         setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
 
