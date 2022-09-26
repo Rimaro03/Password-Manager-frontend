@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import PasswordSecurity from "../charts/PasswordSecurity";
 import Appbar from "../components/Appbar/Appbar";
 import Navbar from "../components/Navbar/Navbar";
+import Report from "../components/Report/Report";
 import checkLogged from "../functions/checkLogged";
 
 const Homepage = () => {
@@ -28,7 +29,7 @@ const Homepage = () => {
     <>
       <Navbar />
       <Appbar />
-      <PasswordSecurity />
+      <Report />
     </>
   );
 };

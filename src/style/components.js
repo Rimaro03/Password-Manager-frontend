@@ -100,3 +100,8 @@ export const PersonalDatas = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
 }));
+
+export const HomepageContainer = styled(Box)(() => ({
+  display: "flex",
+  justifyContent: "flex-end",
+}));

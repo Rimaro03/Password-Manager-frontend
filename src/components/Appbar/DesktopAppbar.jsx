@@ -38,10 +38,6 @@ const DesktopAppbar = () => {
       });
   }, []);
 
-  const openCart = (e) => {
-    setCartOpen(e.currentTarget);
-  };
-
   return (
     <AppbarContainer
       sx={{
