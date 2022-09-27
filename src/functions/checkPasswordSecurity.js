@@ -34,8 +34,11 @@ const checkPasswordSecurity = async (passwordList) => {
 
   const calcPercetage = (section) => {
     const totalPasswords = passwordList.length;
-    passwords[section].perc =
-      (passwords[section].list.length * 100) / totalPasswords;
+    passwords[section].perc = Number(
+      ((passwords[section].list.length * 100) / totalPasswords)
+        .toString()
+        .slice(0, 4)
+    );
   };
 
   calcPercetage("safe");

@@ -1,46 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ReactECharts from "echarts-for-react";
-import { useCookies } from "react-cookie";
-import checkPasswordSecurity from "../functions/checkPasswordSecurity";
-import { Backdrop, CircularProgress } from "@mui/material";
 
-const PasswordSecurity = () => {
-  const [cookie, setCookie] = useCookies();
-  const [checkedPasswords, setCheckedPasswords] = useState({
-    safe: {
-      perc: 0,
-      list: [],
-    },
-    weak: {
-      perc: 0,
-      list: [],
-    },
-    reused: {
-      perc: 0,
-      list: [],
-    },
-  });
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    fetch("https://password-manager-backend.vercel.app/user/passwords", {
-      headers: {
-        Authorization: cookie.session,
-      },
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        checkPasswordSecurity(json.passwords).then((res) => {
-          setCheckedPasswords(res);
-          setLoading(false);
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
-  }, []);
+const PasswordSecurity = (props) => {
+  const checkedPasswords = props.checkedPasswords;
+  console.log(checkedPasswords);
 
   const gaugeData = [
     {
@@ -149,20 +112,7 @@ const PasswordSecurity = () => {
       },
     ],
   };
-  return (
-    <>
-      {loading ? (
-        <Backdrop
-          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={loading}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
-      ) : (
-        <ReactECharts option={options} />
-      )}
-    </>
-  );
+  return <ReactECharts option={options} />;
 };
 
 export default PasswordSecurity;

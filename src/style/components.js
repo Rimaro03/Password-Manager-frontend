@@ -101,7 +101,31 @@ export const PersonalDatas = styled(Box)(() => ({
   flexDirection: "column",
 }));
 
-export const HomepageContainer = styled(Box)(() => ({
+export const HomepageContainer = styled(Box)(() => ({}));
+
+export const DataCardContainer = styled(Box)(() => ({
+  maxWidth: "450px",
+  backgroundColor: palette.purple.main,
   display: "flex",
-  justifyContent: "flex-end",
+  justifyContent: "space-between",
+  borderRadius: 10,
+  margin: "auto",
+  marginTop: "20px",
+  padding: 15,
+}));
+
+export const PasswordCardContainer = styled(Box)(() => ({
+  maxWidth: "100%",
+  backgroundColor: palette.purple.main,
+  display: "flex",
+  justifyContent: "space-between",
+  borderRadius: 10,
+  margin: "10px",
+  marginTop: "20px",
+  padding: 15,
+  transition: "all .2s ease-in-out",
+  ":hover": {
+    cursor: "pointer",
+    transform: "scale(1.1)",
+  },
 }));
