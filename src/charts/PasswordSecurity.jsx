@@ -3,7 +3,6 @@ import ReactECharts from "echarts-for-react";
 
 const PasswordSecurity = (props) => {
   const checkedPasswords = props.checkedPasswords;
-  console.log(checkedPasswords);
 
   const gaugeData = [
     {

@@ -23,7 +23,7 @@ const checkPasswordSecurity = async (passwordList) => {
     if (checkedPasswords.includes(passwordURL)) {
       passwords.reused.list.push(passwordObj);
     } else {
-      if (!strongPasswordRegex.test(passwordURL)) {
+      if (!strongPasswordRegex.test(passwordObj.password)) {
         passwords.weak.list.push(passwordObj);
       } else {
         passwords.safe.list.push(passwordObj);
